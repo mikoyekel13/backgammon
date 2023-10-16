@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/CSS/mainStyle.css" rel="styleSheet">
+</head>
+
+<body>
+    <header>
+        <h1>Miko's Game Site</h1>
+        <h2>The best game site in the world!</h2>
+        <div id="loginSignUpButtons">
+            <button type="button" id="loginButton">Log in</button>
+            <button type="button" id="signUpButton">Sign up</button>
+        </div>
+    </header>
+    <form class="loginSignUpform" id="loginForm">
+        <label for="usernameLogin">username:</label>
+        <input type="text" id="usernameLogin" name="usernameLogin">
+        <label for="passwordLogin">password:</label>
+        <input type="password" id="passwordLogin" name="passwordLogin">
+        <button type="button" id="loginSubmitButton">Log in!</button>
+        <button type="button" class="backFromFormButton" id="loginBackButton">back</button>
+    </form>
+    <form class="loginSignUpform" id="signUpForm">
+        <label for="usernameSignUp">Choose a username:</label>
+        <input type="text" id="usernameSignUp" name="usernameSignUp">
+        <label for="passwordSignUp">Choose a password:</label>
+        <input type="password" id="passwordSignUp" name="passwordSignUp">
+        <label for="checkPasswordSignUp">Type the password again:</label>
+        <input type="password" id="checkPasswordSignUp" name="checkPasswordSignUp">
+        <button type="button" id="signUpSubmitButton">Sign up!</button>
+        <button type="button" class="backFromFormButton" id="signUpBackButton">back</button>
+    </form>
+    <div id="alertFlexBox">
+        <p class="inputAlert" id="usernameAlert">username must be between 3 to 8 characters</br>and not include any
+            speacial characters</p>
+        <p class="inputAlert" id="passwordAlert">password must be at least 8 characters,<br>and include higher-case
+            letters,<br>
+            lower-case letters, and numbers<br>do not include special characters</p>
+        <p class="inputAlert" id="checkPasswordAlert">passwords do not match</p>
+    </div>
+    <p class="generalAlert" id="signUpSubmitFail">not all conditions met</p>
+    <p class="generalAlert" id="usernameSubmitFail">username incorrect</p>
+    <p class="generalAlert" id="passwordSubmitFail">passsword incorrect</p>
+    <script src="/JS/mainJS.js"></script>
+</body>
+
+</html>

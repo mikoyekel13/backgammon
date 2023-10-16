@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Color</title>
+    <link href="./style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class = 'box' id="randomColor"></div>
+    <button id="generate">Generate Color</button>
+    <p id="instructions">Genrate a random color,<br> and try to guess it's RGB values below!<br>
+    (The RGB values of the genereted color will be in multipliers of 5)</p>
+    <div class = 'box' id="guessedColor"></div>
+    <div id="RGB">
+        <label for="red">Red:</label>
+        <input type="number" id="red" name="red" min="0" max="255" step="5">
+        <label for="green">Green:</label>
+        <input type="number" id="green" name="green" min="0" max="255" step="5">
+        <label for="blue">Blue:</label>
+        <input type="number" id="blue" name="blue" min="0" max="255" step="5">
+    </div>
+    <button id = 'check'>Check!</button>
+    <script src="./code.js"></script>
+</body>
+
+</html>

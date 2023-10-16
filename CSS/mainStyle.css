@@ -1,0 +1,76 @@
+/* style for all */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    padding: 10px;
+    width: 120px;
+}
+
+/* header style */
+header {
+    margin-top: 20vh;
+    width: 100vw;
+    text-align: center;
+}
+
+#loginSignUpButtons {
+    height: 17vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* form style */
+.loginSignUpform {
+    position: absolute;
+    top: 20vh;
+    left: 40vw;
+    width: 20vw;
+    height: 35vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: black 2px solid;
+}
+
+.backFromFormButton {
+    width: 90px;
+    font-size: 0.8em;
+}
+
+/* alert messages style */
+.generalAlert {
+    padding: 4px;
+    display: none;
+    border: red 2px solid;
+    font-size: 1.2em;
+    text-align: center;
+    color: red;
+}
+
+#alertFlexBox {
+    position: absolute;
+    top: 57vh;
+    left: 20vw;
+    width: 60vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.inputAlert {
+    padding: 4px;
+    display: none;
+    border: red 2px solid;
+    font-size: 0.8em;
+    text-align: center;
+    color: red;
+}

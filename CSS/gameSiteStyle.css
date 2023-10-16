@@ -1,0 +1,38 @@
+/* all */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100vw;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+}
+
+.games {
+    height: 50vh;
+    width: 25vw;
+    border: black 2px solid;
+    text-align: center;
+    padding-top: 15vh;
+}
+
+h2 {
+    margin: 5px;
+    padding: 5px;
+}
+
+button {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+/* games design */
+#backgammon {
+    background-color: rgb(218, 160, 85);
+}
