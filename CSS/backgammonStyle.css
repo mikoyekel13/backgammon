@@ -41,6 +41,10 @@ main {
     flex-direction: column-reverse;
 }
 
+.piecesContainer > div:nth-child(n + 6) {
+    display: none;
+}
+
 #container6, #container19 {
     padding-right: 50px;
     padding-left: 20px;
@@ -80,20 +84,24 @@ header {
     height: 3.5vw;
     width: 3.5vw;
     margin: 3px;
-    padding-top: 12px;
+    padding-top: 3px;
     z-index: 3;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
+    color: black;
+    font-size: 2em;
 }
 
 .blackGamePiece {
     height: 3.5vw;
     width: 3.5vw;
     margin: 3px;
-    padding-top: 12px;
+    padding-top: 3px;
     z-index: 3;
     border-radius: 50%;
     background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 2em;
 }
 
 /* dice style */
