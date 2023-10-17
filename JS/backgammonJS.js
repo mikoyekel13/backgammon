@@ -1,6 +1,7 @@
 //start game menu load
 const startMenu = document.querySelector('header');
 const containers = document.querySelector('main').children;
+const eatenContainer = document.querySelector('#eatenPieces').children;
 
 function startGameMenuLoad() {
     startMenu.style.display = 'block';
@@ -53,38 +54,58 @@ function diceRoll() {
 }
 
 function markPieces(color) {
+    let checkPossible = false;
     resetColor();
-    for (let item of containers) {
-        if (item.innerHTML.includes('whiteGamePiece') && color === 'white') {
-            item.style.background = 'rgb(0, 247, 255, 50)';
-            item.addEventListener('click', lightPossible);
-        } else if (item.innerHTML.includes('blackGamePiece') && color === 'black') {
-            item.style.background = 'rgb(0, 247, 255, 50)';
-            item.addEventListener('click', lightPossible);
+    if (color == 'white') {
+        for (let item of containers) {
+            if (item.innerHTML.includes('whiteGamePiece') && realPossible(findPossibeWhite(item), 'white').length > 0) {
+                console.log(findPossibeWhite(item));
+                checkPossible = true;
+                item.style.background = 'rgba(0, 247, 255, 0.2)';
+                item.addEventListener('click', lightPossible);
+            }
         }
+        if (eatenContainer[0].children.length > 0) {
+            checkPossible = true;
+            eatenContainer[0].style.background = 'rgb(182, 196, 152)';
+            eatenContainer[0].addEventListener('click', lightPossible);
+        }
+    } else if (color == 'black') {
+        for (let item of containers) {
+            if (item.innerHTML.includes('blackGamePiece') && realPossible(findPossibeBlack(item), 'black').length > 0) {
+                checkPossible = true;
+                item.style.background = 'rgba(0, 247, 255, 0.2)';
+                item.addEventListener('click', lightPossible);
+            }
+        }
+        if (eatenContainer[1].children.length > 0) {
+            checkPossible = true;
+            eatenContainer[1].style.background = 'rgb(182, 196, 152)';
+            eatenContainer[1].addEventListener('click', lightPossible);
+        }
+    } if (checkPossible === false) {
+        turn(oppositeColor(color));
     }
 }
 
 function lightPossible() {
     resetColor();
-    this.style.background = 'rgb(43, 255, 0)';
+    this.style.background = 'rgba(43, 255, 0, 0.2)';
     if (this.innerHTML.includes('whiteGamePiece')) {
         nowPossible = findPossibeWhite(this);
-        for (let item of nowPossible) {
-            if (item <= 23 && !(containers[item].innerHTML.includes('blackGamePiece') && containers[item].children.length >= 2)) {
-                containers[item].style.background = 'rgb(0, 247, 255, 50)';
-                containers[item].removeEventListener('click', lightPossible);
-                containers[item].addEventListener('click', movePieceHere);
-            }
+        if (this.id.includes('whiteEatenPieces')) { nowPossible = findPossibeWhite(this, true); };
+        for (let item of realPossible(nowPossible, 'white')) {
+            item.style.background = 'rgba(0, 247, 255, 0.2)';
+            item.removeEventListener('click', lightPossible);
+            item.addEventListener('click', movePieceHere);
         }
     } else if (this.innerHTML.includes('blackGamePiece')) {
         nowPossible = findPossibeBlack(this);
-        for (let item of nowPossible) {
-            if (item <= 23 && !(containers[item].innerHTML.includes('whiteGamePiece') && containers[item].children.length >= 2)) {
-                containers[item].style.background = 'rgb(0, 247, 255, 50)';
-                containers[item].removeEventListener('click', lightPossible);
-                containers[item].addEventListener('click', movePieceHere);
-            }
+        if (this.id.includes('blackEatenPieces')) { nowPossible = findPossibeBlack(this, true); };
+        for (let item of realPossible(nowPossible, 'black')) {
+            item.style.background = 'rgba(0, 247, 255, 0.2)';
+            item.removeEventListener('click', lightPossible);
+            item.addEventListener('click', movePieceHere);
         }
     }
 }
@@ -106,13 +127,15 @@ function findPossibe() {
     }
 }
 
-function findPossibeWhite(container) {
+function findPossibeWhite(container, backToGame = false) {
     let searchedKey = findKey(container);
+    if (backToGame) { searchedKey = -1 };
     return possible.map(item => searchedKey + item);
 }
 
-function findPossibeBlack(container) {
+function findPossibeBlack(container, backToGame = false) {
     let searchedKey = findKey(container);
+    if (backToGame) { searchedKey = 24 };
     return possible.map(item => searchedKey - item);
 }
 
@@ -135,6 +158,8 @@ function removeGamePiece(container) {
     container.removeChild(container.lastChild);
     if (container.children.length > 5) {
         container.children[4].innerHTML = `+${container.children.length - 5}`;
+    } else if (container.children.length == 5) {
+        container.children[4].innerHTML = '';
     }
 }
 
@@ -142,7 +167,7 @@ function movePieceHere() {
     let color;
     handlePossible(this);
     for (let i = 0; i < containers.length; i++) {
-        if (containers[i].style.background == 'rgb(43, 255, 0)') {
+        if (containers[i].style.background == 'rgba(43, 255, 0, 0.2)') {
             if (containers[i].innerHTML.includes('whiteGamePiece')) {
                 color = 'white';
             } else if (containers[i].innerHTML.includes('blackGamePiece')) {
@@ -152,10 +177,24 @@ function movePieceHere() {
             break;
         }
     }
+    if (eatenContainer[0].style.background == 'rgba(43, 255, 0, 0.2)') {
+        color = 'white';
+        removeGamePiece(eatenContainer[0]);
+    } else if (eatenContainer[1].style.background == 'rgba(43, 255, 0, 0.2)') {
+        color = 'black';
+        removeGamePiece(eatenContainer[1]);
+    }
+    if (this.children.length > 0 && this.innerHTML.includes(`${oppositeColor(color)}GamePiece`)) {
+        removeGamePiece(this);
+        if (color == 'white') {
+            addGamePiece(eatenContainer[1], 'black');
+        } else if (color == 'black') {
+            addGamePiece(eatenContainer[0], 'white');
+        }
+    }
     addGamePiece(this, color);
     resetColor();
     resetEventListeners();
-    this.style.background = 'rgb(255, 98, 171)';
     if (possible.length > 0) {
         markPieces(color);
     } else {
@@ -174,7 +213,7 @@ function handlePossible(container) {
         possible.splice(-1);
     } else if (container === containers[nowPossible[0]] && diceResults[0] != diceResults[1]) {
         possible = [possible[1]];
-    } 
+    }
     if (typeof possible[0] == 'undefined') {
         possible = [];
     }
@@ -182,8 +221,10 @@ function handlePossible(container) {
 
 function resetColor() {
     for (let i = 0; i < containers.length; i++) {
-        containers[i].style.background = 'rgb(228, 184, 126)';
+        containers[i].style.background = 'transparent';
     }
+    eatenContainer[0].style.background = 'rgb(175, 136, 85)';
+    eatenContainer[1].style.background = 'rgb(175, 136, 85)';
 }
 
 function resetEventListeners() {
@@ -191,7 +232,10 @@ function resetEventListeners() {
         containers[i].removeEventListener('click', lightPossible);
         containers[i].removeEventListener('click', movePieceHere);
     }
-
+    eatenContainer[0].removeEventListener('click', lightPossible);
+    eatenContainer[1].removeEventListener('click', lightPossible);
+    eatenContainer[0].removeEventListener('click', movePieceHere);
+    eatenContainer[1].removeEventListener('click', movePieceHere);
 }
 
 function findKey(container) {
@@ -208,4 +252,15 @@ function oppositeColor(color) {
     } else if (color === 'black') {
         return 'white';
     }
+}
+
+function realPossible(array, color) {
+    let arr = [];
+    for (let item of array) {
+        if (0 <= item && item <= 23) {
+            if (!(containers[item].innerHTML.includes(`${oppositeColor(color)}GamePiece`) && containers[item].children.length >= 2)) {
+                arr.push(containers[item]);
+            }
+        }
+    } return arr;
 }
