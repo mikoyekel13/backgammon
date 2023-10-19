@@ -115,7 +115,7 @@ function loginSubmit() {
     else if (passwordLogin.value !== localStorage.getItem("password")) {
         passwordSubmitFail.style.display = 'block';
     } else {
-        window.location.href = '/HTML/gameSite.html';
+        window.location.href = './HTML/gameSite.html';
     }
     
 }

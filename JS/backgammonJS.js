@@ -39,6 +39,13 @@ function startGame() {
     addGamePiece(containers[5], 'black', 5);
     addGamePiece(containers[7], 'black', 3);
     addGamePiece(containers[12], 'black', 5);
+    //show features
+    // addGamePiece(containers[23], 'white', 2);
+    // addGamePiece(containers[22], 'white', 2);
+    // addGamePiece(containers[17], 'white', 1);
+    // addGamePiece(containers[0], 'black', 2);
+    // addGamePiece(containers[1], 'black', 2);
+    // addGamePiece(eatenContainer[1], 'black', 1);
     turn('white');
 }
 
@@ -61,6 +68,7 @@ function markPieces(color) {
             if (item.innerHTML.includes('whiteGamePiece') && realPossible(findPossibleWhite(item), 'white').length > 0 && eatenContainer[0].children.length == 0) {
                 checkPossible = true;
                 item.style.background = 'rgba(0, 247, 255, 0.35)';
+                item.style.border = 'black 3px solid';
                 item.addEventListener('click', lightPossible);
             }
         }
@@ -77,6 +85,7 @@ function markPieces(color) {
             if (item.innerHTML.includes('blackGamePiece') && realPossible(findPossibleBlack(item), 'black').length > 0 && eatenContainer[1].children.length == 0) {
                 checkPossible = true;
                 item.style.background = 'rgba(0, 247, 255, 0.35)';
+                item.style.border = 'black 3px solid';
                 item.addEventListener('click', lightPossible);
             }
         }
@@ -89,7 +98,7 @@ function markPieces(color) {
         }
     }
     if (takingOutAllowed(color)) {
-        possibeEndGameAdjusment(color);
+        possibleEndGameAdjusment(color);
         checkPossible = markPiecesOut(color, checkPossible);
     }
     if (checkPossible === false) {
@@ -105,11 +114,13 @@ function lightPossible() {
     lightPossibleEvent = []; outButtonEvent = [];
     outButton.style.display = 'none';
     this.style.background = 'rgba(43, 255, 0, 0.35)';
+    this.style.border = 'black 3px solid';
     if (this.innerHTML.includes('whiteGamePiece')) {
         nowPossible = findPossibleWhite(this);
         if (this.id.includes('whiteEatenPieces')) { nowPossible = findPossibleWhite(this, true); };
         for (let item of realPossible(nowPossible, 'white')) {
             item.style.background = 'rgba(0, 247, 255, 0.35)';
+            item.style.border = 'black 3px solid';
             resetPossibleEvents(outPossibilites);
             item.removeEventListener('click', lightPossible);
             lightPossibleEvent.push(item);
@@ -120,6 +131,7 @@ function lightPossible() {
         if (this.id.includes('blackEatenPieces')) { nowPossible = findPossibleBlack(this, true); };
         for (let item of realPossible(nowPossible, 'black')) {
             item.style.background = 'rgba(0, 247, 255, 0.35)';
+            item.style.border = 'black 3px solid';
             resetPossibleEvents(outPossibilites);
             item.removeEventListener('click', lightPossible);
             item.removeEventListener('click', lightPossible);
@@ -162,7 +174,7 @@ function movePieceHere() {
     resetColor();
     resetEventListeners();
     if (checkWinner(color)) {
-        decleareWin(color);
+        declareWin(color);
     } else if (possible.length > 0) {
         markPieces(color);
     } else {
@@ -210,8 +222,8 @@ function checkWinner(color) {
     return checkWin;
 }
 
-function decleareWin(color) {
-    winnerTxt.innerHTML += `<h1>${color} Won The</br>Game!</h1>`;
+function declareWin(color) {
+    winnerTxt.innerHTML = `<h1>${color} Won The</br>Game!</h1>`;
     winnerTag.style.background = color;
     winnerTxt.style.color = oppositeColor(color);
     winnerTag.style.display = 'block';
@@ -243,6 +255,7 @@ function markPiecesOut(color, possibleCheck) {
             if (containers[i].innerHTML.includes('whiteGamePiece') && eatenContainer[0].children.length == 0 && checkOutPossible(containers[i], color)) {
                 check = true;
                 containers[i].style.background = 'rgba(255, 53, 221, 0.35)';
+                containers[i].style.border = 'black 3px solid';
                 outPossibilites.push(containers[i]);
                 containers[i].addEventListener('click', outButtonActive);
             }
@@ -252,6 +265,7 @@ function markPiecesOut(color, possibleCheck) {
             if (containers[i].innerHTML.includes('blackGamePiece') && eatenContainer[1].children.length == 0 && checkOutPossible(containers[i], color)) {
                 check = true;
                 containers[i].style.background = 'rgba(255, 53, 221, 0.35)';
+                containers[i].style.border = 'black 3px solid';
                 outPossibilites.push(containers[i]);
                 containers[i].addEventListener('click', outButtonActive);
             }
@@ -268,6 +282,7 @@ function outButtonActive() {
     resetPossibleEvents(outPossibilites);
     nowPossibleOut = [...possible];
     this.style.background = 'rgba(43, 255, 0, 0.35)';
+    this.style.border = 'black 3px solid';
     outButton.style.display = 'block';
 }
 
@@ -304,7 +319,7 @@ function takeOut() {
     resetColor();
     resetEventListeners();
     if (checkWinner(color)) {
-        decleareWin(color);
+        declareWin(color);
     } if (possible.length > 0) {
         markPieces(color);
     } else {
@@ -335,7 +350,7 @@ function handlePossibleOut(container) {
     }
 }
 
-function possibeEndGameAdjusment(color) {
+function possibleEndGameAdjusment(color) {
     let lastKey = findLastKey(color);
     if (color == 'white') {
         if (diceResults[0] == diceResults[1] && possible[0] > 24 - lastKey) {
@@ -343,10 +358,10 @@ function possibeEndGameAdjusment(color) {
                 possible[i] = 24 - lastKey;
             }
         }
-        if (possible[0] > 24 - lastKey) {
+        if (possible[0] > 24 - lastKey && diceResults[0] != diceResults[1]) {
             possible[0] = 24 - lastKey;
         }
-        if (possible[1] > 24 - lastKey) {
+        if (possible[1] > 24 - lastKey && diceResults[0] != diceResults[1]) {
             possible[1] = 24 - lastKey;
         }
     } else if (color == 'black') {
@@ -355,10 +370,10 @@ function possibeEndGameAdjusment(color) {
                 possible[i] = lastKey + 1;
             }
         }
-        if (possible[0] > lastKey + 1) {
+        if (possible[0] > lastKey + 1 && diceResults[0] != diceResults[1]) {
             possible[0] = lastKey + 1;
         }
-        if (possible[1] > lastKey + 1) {
+        if (possible[1] > lastKey + 1 && diceResults[0] != diceResults[1]) {
             possible[1] = lastKey + 1;
         }
     }
@@ -386,7 +401,8 @@ function findPossible() {
             diceResults[1],
             diceResults[0] + diceResults[1],
         ]
-    }
+    } 
+    
 }
 
 function findPossibleWhite(container, backToGame = false) {
@@ -443,9 +459,12 @@ function realPossible(array, color) {
 function resetColor() {
     for (let i = 0; i < containers.length; i++) {
         containers[i].style.background = 'transparent';
+        containers[i].style.border = 'transparent 3px solid';
     }
     eatenContainer[0].style.background = 'rgb(175, 136, 85)';
     eatenContainer[1].style.background = 'rgb(175, 136, 85)';
+    eatenContainer[0].style.border = 'rgb(133, 96, 48) 7px solid';
+    eatenContainer[1].style.border = 'rgb(133, 96, 48) 7px solid';
 }
 
 function resetEventListeners() {
@@ -468,6 +487,7 @@ function resetPossibleEvents(array) {
     for (let item of array) {
         if (item.style.background == 'rgba(0, 247, 255, 0.35)') {
             item.removeEventListener('click', outButtonActive);
+            item.removeEventListener('click', lightPossible);
             outButtonEvent.push(item);
         }
     }

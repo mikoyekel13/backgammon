@@ -75,6 +75,8 @@ main {
     align-items: center;
     text-align: center;
     order: 1;
+    color: white;
+    padding: 2px; 
 }
 
 .piecesContainer:nth-child(n+13) {
@@ -131,11 +133,15 @@ header {
     width: 100vw;
     text-align: center;
     font-size: 2em;
-    color: white;
-    text-shadow: 2px 2px 2px black, 2px 2px 2px black;
+    color: rgb(255, 253, 201);
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
 }
 
 #startGameButton {
+    background-color: rgb(240, 240, 239);;
+    font-size: 2em;
+    color: rgb(141, 84, 68);
+    text-shadow: 2px 2px 2px black;
     font-size: 1.5em;
     padding: 12px;
     border-radius: 50%;
