@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <img src="./Media/images/mainBackground.jpg" id="background">
     <header>
         <h1>Miko's Game Site</h1>
         <h2>The best game site in the world!</h2>
@@ -34,15 +35,15 @@
         <input type="password" id="checkPasswordSignUp" name="checkPasswordSignUp">
         <button type="button" id="signUpSubmitButton">Sign up!</button>
         <button type="button" class="backFromFormButton" id="signUpBackButton">back</button>
+        <div id="alertFlexBox">
+            <p class="inputAlert" id="usernameAlert">! username must be between 3 to 8 characters</br>and not include any
+                speacial characters</p>
+            <p class="inputAlert" id="passwordAlert">! password must be at least 8 characters,<br>and include higher-case
+                letters,<br>
+                lower-case letters, and numbers<br>do not include special characters</p>
+            <p class="inputAlert" id="checkPasswordAlert">! passwords do not match</p>
+        </div>
     </form>
-    <div id="alertFlexBox">
-        <p class="inputAlert" id="usernameAlert">username must be between 3 to 8 characters</br>and not include any
-            speacial characters</p>
-        <p class="inputAlert" id="passwordAlert">password must be at least 8 characters,<br>and include higher-case
-            letters,<br>
-            lower-case letters, and numbers<br>do not include special characters</p>
-        <p class="inputAlert" id="checkPasswordAlert">passwords do not match</p>
-    </div>
     <p class="generalAlert" id="signUpSubmitFail">not all conditions met</p>
     <p class="generalAlert" id="usernameSubmitFail">username incorrect</p>
     <p class="generalAlert" id="passwordSubmitFail">passsword incorrect</p>

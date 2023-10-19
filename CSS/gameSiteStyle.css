@@ -6,7 +6,7 @@
 }
 
 main {
-    width: 100vw;
+    width: 99vw;
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -15,10 +15,31 @@ main {
 
 .games {
     height: 50vh;
-    width: 25vw;
+    width: 24.75vw;
     border: black 2px solid;
     text-align: center;
-    padding-top: 15vh;
+    padding-top: 12vh;
+    background-color: rgb(245, 245, 130);
+    font-size: 1.7em; 
+    color: white;
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
+    box-shadow: inset 10px 10px 5px -3px rgba(0, 0, 0, 0.5), inset -10px -10px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+.games:nth-child(5n + 1) {
+    background-color: rgb(185, 40, 230);
+}
+
+.games:nth-child(5n + 2) {
+    background-color: rgb(0, 255, 179);
+}
+
+.games:nth-child(5n + 3) {
+    background-color: rgb(49, 36, 221);
+}
+
+.games:nth-child(5n + 4) {
+    background-color: rgb(243, 41, 108);
 }
 
 h2 {
@@ -30,6 +51,13 @@ button {
     margin: 5px;
     padding: 12px;
     border-radius: 50%;
+    width: 10vw;
+    height: 7vw;
+    background-color: rgb(233, 233, 233);
+    font-size: 1.4em;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
 }
 
 /* games design */

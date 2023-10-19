@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+body {
+    background-color: rgb(247, 122, 247);
+}
+
 button {
     padding: 10px;
     width: 120px;
@@ -16,23 +20,49 @@ header {
     width: 100vw;
     text-align: center;
 }
+header h1, header h2 {
+    padding: 20px;
+    font-size: 3.5em;
+    color: rgb(255, 247, 0);
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
+}
 
 #loginSignUpButtons {
     height: 17vh;
     width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: raw;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
+}
+
+#loginButton, #signUpButton {
+    padding: 20px;
+    margin: 10px;
+    font-size: 2em;
+    font-weight: 700;
+    background-color: rgb(255, 247, 0);
+    color: black;
+    border: black 3px solid;
+    border-radius: 50%;
+}
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
 }
 
 /* form style */
 .loginSignUpform {
     position: absolute;
-    top: 20vh;
+    top: 15vh;
     left: 40vw;
-    width: 20vw;
-    height: 35vh;
+    width: 28vw;
+    /* height: 35vh; */
     display: none;
     flex-direction: column;
     align-items: center;
@@ -40,37 +70,51 @@ header {
     border: black 2px solid;
 }
 
-.backFromFormButton {
+label {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.backFromFormButton, #signUpSubmitButton, #loginSubmitButton {
     width: 90px;
     font-size: 0.8em;
+    margin: 7px;
+    font-size: 1em;
+    font-weight: 500;
 }
 
 /* alert messages style */
 .generalAlert {
+    background-color: yellow;
     padding: 4px;
     display: none;
-    border: red 2px solid;
+    border: rgb(207, 21, 21) 2px solid;
     font-size: 1.2em;
     text-align: center;
-    color: red;
+    color: rgb(207, 21, 21);
+    font-weight: 700;
 }
 
 #alertFlexBox {
-    position: absolute;
+    /* position: absolute;
     top: 57vh;
-    left: 20vw;
+    left: 20vw; */
     width: 60vw;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
 
 .inputAlert {
+    background-color: yellow;
+    margin: 10px;
     padding: 4px;
     display: none;
-    border: red 2px solid;
-    font-size: 0.8em;
+    border: rgb(207, 21, 21) 2px solid;
+    font-size: 0.9em;
     text-align: center;
-    color: red;
+    color: rgb(207, 21, 21);
+    font-weight: 700;
 }
