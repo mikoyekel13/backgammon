@@ -100,9 +100,6 @@ label {
 }
 
 #alertFlexBox {
-    /* position: absolute;
-    top: 57vh;
-    left: 20vw; */
     width: 60vw;
     display: flex;
     flex-direction: column;
