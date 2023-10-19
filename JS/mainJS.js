@@ -84,7 +84,8 @@ function checkPasswordAgain() {
 }
 
 function signUpSubmit() {
-    if (usernameAlert.style.display === 'none' && passwordAlert.style.display == 'none' && checkPasswordAlert.style.display === 'none') {
+    if (usernameAlert.style.display === 'none' && passwordAlert.style.display == 'none' && checkPasswordAlert.style.display === 'none' && 
+    usernameSignUp.value != '' && passwordSignUp.value != '' && checkPasswordSignUp.value != '') {
         localStorage.setItem('username', usernameSignUp.value);
         localStorage.setItem('password', passwordSignUp.value);
         signUpSubmitFail.style.display = 'none';  
